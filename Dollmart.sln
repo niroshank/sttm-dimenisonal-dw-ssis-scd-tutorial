@@ -7,6 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dollmart.Database", "Dollma
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Dollmart.Source.Database", "Dollmart.Source.Database\Dollmart.Source.Database.sqlproj", "{1B58E491-A86D-4E38-A32F-EFBABD768BA6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{54FE8F6B-BEB2-46F4-AE77-8D8A63C30036}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\source-to-target-mapping.xlsx = Docs\source-to-target-mapping.xlsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
