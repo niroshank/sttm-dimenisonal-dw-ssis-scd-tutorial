@@ -8,7 +8,7 @@
 -- Create relational tables for dollmart toy stores
 CREATE TABLE [dbo].[CustomerSegment] (
     [Id]						INT                  NOT NULL			IDENTITY(1,1),
-    [SegmentName]				NVARCHAR(100)        NOT NULL,
+    [SegmentName]				NCHAR(7)        NOT NULL,
 	CONSTRAINT [PK_CustomerSegment] PRIMARY KEY CLUSTERED ([Id] ASC),
 );
 GO
@@ -18,9 +18,9 @@ CREATE TABLE [dbo].[Customer] (
 	[CustomerName]				NVARCHAR(100)        NOT NULL,
 	[SegmentId]					INT			         NOT NULL,
 	[Address]					NVARCHAR(100)        NOT NULL,
-	[State]						NVARCHAR(050)        NOT NULL,
-	[City]						NVARCHAR(050)        NOT NULL,
-	[Country]					NVARCHAR(050)        NOT NULL,
+	[City]						NVARCHAR(50)        NOT NULL,
+	[State]						NCHAR(3)        NOT NULL,
+	[Country]					NVARCHAR(50)        NOT NULL,
 	CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_Customer_CustomerSegment] FOREIGN KEY ([SegmentId]) REFERENCES [dbo].[CustomerSegment] ([Id])
 );
@@ -28,14 +28,14 @@ GO
 
 CREATE TABLE [dbo].[ProductCategory] (
 	[Id]						INT                  NOT NULL			IDENTITY(1,1),
-	[Description]				NVARCHAR(100)        NOT NULL,
+	[Description]				NVARCHAR(50)        NOT NULL,
 	CONSTRAINT [PK_ProductCategory] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 GO
 
 CREATE TABLE [dbo].[ProductType] (
 	[Id]						INT                  NOT NULL			IDENTITY(1,1),
-	[Description]				NVARCHAR(100)        NOT NULL,
+	[Description]				NVARCHAR(50)        NOT NULL,
 	[CategoryId]				INT					 NOT NULL,
 	CONSTRAINT [PK_ProductType] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_ProductType_ProductCategory] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[ProductCategory] ([Id])
@@ -44,9 +44,9 @@ GO
 
 CREATE TABLE [dbo].[Product] (
 	[Id]						INT                  NOT NULL			IDENTITY(1,1),
-	[Description]				NVARCHAR(100)        NOT NULL,
+	[Description]				NVARCHAR(50)        NOT NULL,
 	[ProductTypeId]			    INT					 NOT NULL,
-	[UnitOfMeasurement]			NVARCHAR(100)        NOT NULL,
+	[UnitOfMeasurement]			NCHAR (20)      DEFAULT ('N/A') NOT NULL,
 	[QuantityOnHand]			INT					 NOT NULL,
 	CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_Product_ProductType] FOREIGN KEY ([ProductTypeId]) REFERENCES [dbo].[ProductType] ([Id])
@@ -66,7 +66,7 @@ CREATE TABLE [dbo].[OrderDetail] (
 	[Id]					INT						NOT NULL			IDENTITY(1,1),
 	[OrderId]				INT						NOT NULL,
 	[ProductId]				INT						NOT NULL,
-	[Quantity]				INT						NOT NULL,
+	[Quantity]				SMALLINT			    NOT NULL,
 	[UnitPrice]				DECIMAL(13,2)			NOT NULL,
 	CONSTRAINT [PK_OrderDetail] PRIMARY KEY CLUSTERED ([Id] ASC),
 	CONSTRAINT [FK_OrderDetail_OrderHeader] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[OrderHeader] ([Id]),

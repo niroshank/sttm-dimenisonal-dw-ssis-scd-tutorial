@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\create-tables.sql" />
+    <None Include="Scripts\drop-tables.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\DimCustomer.sql" />
