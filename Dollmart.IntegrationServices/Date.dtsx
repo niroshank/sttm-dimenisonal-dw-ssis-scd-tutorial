@@ -11,36 +11,16 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Date"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{A6119313-71F9-41C4-B6BC-66CA9FDB30F6}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{B9E02516-461C-4C7A-8635-3280E19F84E5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
-      DTS:CreationName="EXCEL"
-      DTS:DTSID="{E6FCFCF5-7C9E-449F-B6A5-5D9322F19313}"
-      DTS:ObjectName="Excel Connection Manager">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Asus\source\repos\sttm-dimenisonal-dw-ssis-scd-tutorial\Dollmart.IntegrationServices\resources\dimDate_data.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 1]"
-      DTS:CreationName="EXCEL"
-      DTS:DTSID="{E9D760DF-96A7-48D3-83B3-A26FD95657E9}"
-      DTS:ObjectName="Excel Connection Manager 1">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\Asus\source\repos\sttm-dimenisonal-dw-ssis-scd-tutorial\Dollmart.IntegrationServices\resources\dimDate_data.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:refId="Package.ConnectionManagers[Date flat file]"
       DTS:CreationName="FLATFILE"
       DTS:DTSID="{3C72E2DB-3A9C-49A2-990B-F288C34729BE}"
-      DTS:ObjectName="Flat File Connection Manager">
+      DTS:ObjectName="Date flat file">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -128,57 +108,17 @@
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[LocalHost.dollmart-source-database 1]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{4174E9BC-5FC0-47E0-B676-EDC995005EB5}"
-      DTS:ObjectName="LocalHost.dollmart-source-database 1">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=.;Initial Catalog=dollmart-source-database;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[LocalHost.dollmart-target-database 1]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{36651E6F-62B4-4669-B2E3-212D20F475DC}"
-      DTS:ObjectName="LocalHost.dollmart-target-database 1">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=.;Initial Catalog=dollmart-target-database;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[LocalHost.dollmart-target-database 2]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{CFC96032-0608-479D-B903-D9AE7172EC9C}"
-      DTS:ObjectName="LocalHost.dollmart-target-database 2">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=.;Initial Catalog=dollmart-target-database;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[LocalHost.dollmart-target-database 3]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{C58ECFB1-2E66-4042-8E54-BF400234437A}"
-      DTS:ObjectName="LocalHost.dollmart-target-database 3">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=.;Initial Catalog=dollmart-target-database;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Flow Task"
+      DTS:refId="Package\Load Date Dimension"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{6D4546D8-FFE3-4C36-8872-4F427E6DB5A9}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Flow Task"
+      DTS:ObjectName="Load Date Dimension"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -186,90 +126,90 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Data Conversion"
+              refId="Package\Load Date Dimension\Data Type Conversion"
               componentClassID="Microsoft.DataConvert"
               contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Data Conversion"
-              name="Data Conversion"
+              name="Data Type Conversion"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input]"
                   name="Data Conversion Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[DateKey]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[DateKey]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="DateKey"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[FullDate]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[FullDate]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="FullDate"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[DateName]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[DateName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="DateName"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateName]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateName]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[DayNameOfWeek]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[DayNameOfWeek]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="DayNameOfWeek"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[DayOfMonth]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[DayOfMonth]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="DayOfMonth"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[WeekdayWeekend]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[WeekdayWeekend]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="WeekdayWeekend"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[MonthName]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[MonthName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="MonthName"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[CalendarYear]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input].Columns[CalendarYear]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="CalendarYear"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]" />
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output]"
                   exclusionGroup="1"
                   name="Data Conversion Output"
-                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DateKey]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DateKey]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DateKey]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DateKey]"
                       name="DateKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -277,7 +217,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -285,11 +225,11 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[FullDate]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[FullDate]"
                       dataType="date"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[FullDate]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[FullDate]"
                       name="FullDate"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -297,7 +237,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -305,12 +245,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DateName]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DateName]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="11"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DateName]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DateName]"
                       name="DateName"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -318,7 +258,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateName]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateName]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -326,12 +266,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DayNameOfWeek]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DayNameOfWeek]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="10"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DayNameOfWeek]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DayNameOfWeek]"
                       name="DayNameOfWeek"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -339,7 +279,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -347,11 +287,11 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DayOfMonth]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DayOfMonth]"
                       dataType="i2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DayOfMonth]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DayOfMonth]"
                       name="DayOfMonth"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -359,7 +299,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -367,12 +307,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[WeekdayWeekend]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[WeekdayWeekend]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="10"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[WeekdayWeekend]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[WeekdayWeekend]"
                       name="WeekdayWeekend"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -380,7 +320,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -388,12 +328,12 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[MonthName]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[MonthName]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="10"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[MonthName]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[MonthName]"
                       name="MonthName"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -401,7 +341,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -409,11 +349,11 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[CalendarYear]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[CalendarYear]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[CalendarYear]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[CalendarYear]"
                       name="CalendarYear"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -421,7 +361,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]}</property>
+                          name="SourceInputColumnLineageID">#{Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -432,22 +372,22 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Data Conversion Error Output"
-                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -456,12 +396,12 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Flat File Source"
+              refId="Package\Load Date Dimension\Date Flat File Source"
               componentClassID="Microsoft.FlatFileSource"
               contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Flat File Source"
               localeId="1033"
-              name="Flat File Source"
+              name="Date Flat File Source"
               usesDispositions="true"
               version="1">
               <properties>
@@ -476,25 +416,25 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\Flat File Source.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  refId="Package\Load Date Dimension\Date Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Date flat file]"
+                  connectionManagerRefId="Package.ConnectionManagers[Date flat file]"
                   name="FlatFileConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]"
+                  refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output]"
                   name="Flat File Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateKey]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateKey]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateKey]"
                       name="DateKey"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -509,14 +449,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FullDate]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FullDate]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[FullDate]"
                       name="FullDate"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -531,14 +471,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateName]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateName]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateName]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateName]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DateName]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DateName]"
                       name="DateName"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -553,14 +493,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayNameOfWeek]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayNameOfWeek]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayNameOfWeek]"
                       name="DayNameOfWeek"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -575,14 +515,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayOfMonth]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayOfMonth]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[DayOfMonth]"
                       name="DayOfMonth"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -597,14 +537,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[WeekdayWeekend]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[WeekdayWeekend]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[WeekdayWeekend]"
                       name="WeekdayWeekend"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -619,14 +559,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[MonthName]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[MonthName]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[MonthName]"
                       name="MonthName"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -641,14 +581,14 @@
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CalendarYear]"
+                      externalMetadataColumnId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CalendarYear]"
                       length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].Columns[CalendarYear]"
                       name="CalendarYear"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -666,49 +606,49 @@
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateKey]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateKey]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="DateKey" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FullDate]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FullDate]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="FullDate" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateName]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DateName]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="DateName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayNameOfWeek]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayNameOfWeek]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="DayNameOfWeek" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayOfMonth]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DayOfMonth]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="DayOfMonth" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[WeekdayWeekend]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[WeekdayWeekend]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="WeekdayWeekend" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[MonthName]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[MonthName]"
                       codePage="1252"
                       dataType="str"
                       length="50"
                       name="MonthName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CalendarYear]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CalendarYear]"
                       codePage="1252"
                       dataType="str"
                       length="50"
@@ -716,27 +656,27 @@
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output]"
+                  refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output]"
                   isErrorOut="true"
                   name="Flat File Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                       codePage="1252"
                       dataType="text"
                       description="Flat File Source Error Output Column"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                       name="Flat File Source Error Output Column" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -745,11 +685,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination"
+              refId="Package\Load Date Dimension\Load Date Dimension"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination"
+              name="Load Date Dimension"
               usesDispositions="true"
               version="4">
               <properties>
@@ -802,109 +742,109 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.dollmart-target-database 3]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.dollmart-target-database 3]"
+                  refId="Package\Load Date Dimension\Load Date Dimension.Connections[OleDbConnection]"
+                  connectionManagerID="{C45839A3-1681-4630-AF1F-C39C58DDDDA2}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.dollmart-target-database]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[DateKey]"
                       cachedDataType="i4"
                       cachedName="DateKey"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DateKey]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DateKey]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FullDate]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[FullDate]"
                       cachedDataType="date"
                       cachedName="FullDate"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullDate]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[FullDate]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[FullDate]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[FullDate]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateName]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[DateName]"
                       cachedDataType="wstr"
                       cachedLength="11"
                       cachedName="DateName"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateName]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DateName]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DateName]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DateName]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayNameOfWeek]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[DayNameOfWeek]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="DayNameOfWeek"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNameOfWeek]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DayNameOfWeek]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DayNameOfWeek]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DayNameOfWeek]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DayOfMonth]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[DayOfMonth]"
                       cachedDataType="i2"
                       cachedName="DayOfMonth"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[DayOfMonth]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[DayOfMonth]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WeekdayWeekend]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[WeekdayWeekend]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="WeekdayWeekend"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WeekdayWeekend]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[WeekdayWeekend]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[WeekdayWeekend]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[WeekdayWeekend]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MonthName]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[MonthName]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="MonthName"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MonthName]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[MonthName]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[MonthName]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[MonthName]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CalendarYear]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].Columns[CalendarYear]"
                       cachedDataType="i4"
                       cachedName="CalendarYear"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
-                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[CalendarYear]" />
+                      externalMetadataColumnId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
+                      lineageId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output].Columns[CalendarYear]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
                       dataType="i4"
                       name="DateKey" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FullDate]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[FullDate]"
                       dataType="dbDate"
                       name="FullDate" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateName]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DateName]"
                       dataType="wstr"
                       length="11"
                       name="DateName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayNameOfWeek]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DayNameOfWeek]"
                       dataType="wstr"
                       length="10"
                       name="DayNameOfWeek" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
                       dataType="ui1"
                       name="DayOfMonth" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WeekdayWeekend]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[WeekdayWeekend]"
                       dataType="wstr"
                       length="10"
                       name="WeekdayWeekend" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MonthName]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[MonthName]"
                       dataType="wstr"
                       length="10"
                       name="MonthName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CalendarYear]"
                       dataType="i2"
                       name="CalendarYear" />
                   </externalMetadataColumns>
@@ -912,22 +852,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Load Date Dimension\Load Date Dimension.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Date Dimension\Load Date Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Date Dimension\Load Date Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Date Dimension\Load Date Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -938,27 +878,27 @@
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\Load Date Dimension.Paths[Data Conversion Output]"
+              endId="Package\Load Date Dimension\Load Date Dimension.Inputs[OLE DB Destination Input]"
               name="Data Conversion Output"
-              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+              startId="Package\Load Date Dimension\Data Type Conversion.Outputs[Data Conversion Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Flat File Source Output]"
-              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              refId="Package\Load Date Dimension.Paths[Flat File Source Output]"
+              endId="Package\Load Date Dimension\Data Type Conversion.Inputs[Data Conversion Input]"
               name="Flat File Source Output"
-              startId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]" />
+              startId="Package\Load Date Dimension\Date Flat File Source.Outputs[Flat File Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\Truncate Date Dimension"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{2CCBD310-0A9B-4193-A935-57AD14D0F46C}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="Truncate Date Dimension"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -973,10 +913,10 @@
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{DBE9C74A-BA7F-4414-BEDB-D80E5ADC0850}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:From="Package\Truncate Date Dimension"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Data Flow Task" />
+      DTS:To="Package\Load Date Dimension" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -989,29 +929,29 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="163,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="242,29" />
+          Size="179,42"
+          Id="Package\Load Date Dimension"
+          TopLeft="205.5,156.5" />
         <NodeLayout
-          Size="151,42"
-          Id="Package\Data Flow Task"
-          TopLeft="252,105" />
+          Size="198,42"
+          Id="Package\Truncate Date Dimension"
+          TopLeft="196,58.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="325.5,71">
+          TopLeft="295,100.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,34"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
               Start="0,0"
-              End="0,26.5">
+              End="0,48.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.5" />
+                    End="0,48.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1020,36 +960,47 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <AnnotationLayout
+          Text="Clear all the existing rows in Date dimension, and load data again"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="200,72"
+          Id="0ad78437-7392-4d50-a38d-5eca92a03642"
+          TopLeft="388,95" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Data Flow Task">
+    design-time-name="Package\Load Date Dimension">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
-          Id="Package\Data Flow Task\Flat File Source"
-          TopLeft="27,35" />
+          Size="176,42"
+          Id="Package\Load Date Dimension\Date Flat File Source"
+          TopLeft="225,13.5" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="241,36" />
+          Size="179,42"
+          Id="Package\Load Date Dimension\Load Date Dimension"
+          TopLeft="223.5,217.5" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Load Date Dimension\Data Type Conversion"
+          TopLeft="221.5,115.5" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
-          TopLeft="178,56.5">
+          Id="Package\Load Date Dimension.Paths[Flat File Source Output]"
+          TopLeft="313,55.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="63,0"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
               Start="0,0"
-              End="55.5,0">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="55.5,0" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1058,39 +1009,47 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="474,37" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="397,57.5">
+          Id="Package\Load Date Dimension.Paths[Data Conversion Output]"
+          TopLeft="313,157.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="77,0"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
               Start="0,0"
-              End="69.5,0">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="69.5,0" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="26.75,5,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <AnnotationLayout
+          Text="Connect to predefined dummy data TXT flat file source system"
+          ParentId="Package\Load Date Dimension"
+          FontInfo="{assembly:Null}"
+          Size="200,56"
+          Id="b0bac863-c17e-4327-8421-9bc7511505ac"
+          TopLeft="391,54" />
+        <AnnotationLayout
+          Text="Convert all the Date fields and load into Date dimension"
+          ParentId="Package\Load Date Dimension"
+          FontInfo="{assembly:Null}"
+          Size="200,56"
+          Id="1e75ec2f-25a1-4c30-816f-1cfe36cf1d31"
+          TopLeft="390.5,155.5" />
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Load Date Dimension\Load Date Dimension">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Product] (
-	[Id]						INT                  NOT NULL			IDENTITY(1,1),
+	[Id]						INT                  NOT NULL,
 	[Description]				NVARCHAR(100)        NOT NULL,
 	[ProductTypeId]			    INT					 NOT NULL,
 	[UnitOfMeasurement]			NCHAR (10)      DEFAULT ('N/A') NOT NULL,

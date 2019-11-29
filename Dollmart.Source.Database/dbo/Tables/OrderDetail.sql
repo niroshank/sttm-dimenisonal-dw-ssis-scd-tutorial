@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[OrderDetail] (
-	[Id]					INT						NOT NULL			IDENTITY(1,1),
+	[Id]					INT						NOT NULL,
 	[OrderId]				INT						NOT NULL,
 	[ProductId]				INT						NOT NULL,
 	[Quantity]				SMALLINT			    NOT NULL,

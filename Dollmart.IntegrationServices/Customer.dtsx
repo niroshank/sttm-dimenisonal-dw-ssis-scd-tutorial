@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Customer"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{E2E32D41-079B-40CA-8E78-54E1411F25E8}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{AB628283-51EA-4FA7-97F9-188BAA13B1C5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -40,13 +40,13 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Data Flow Task"
+      DTS:refId="Package\Load Customer Dimension"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{0C358E88-CBD2-4342-B963-F1D786EE4A93}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Data Flow Task"
+      DTS:ObjectName="Load Customer Dimension"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -54,11 +54,11 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Lookup"
+              refId="Package\Load Customer Dimension\Customer Segment Lookup"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
+              name="Customer Segment Lookup"
               usesDispositions="true"
               version="6">
               <properties>
@@ -110,7 +110,7 @@ where [refTable].[Id] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SegmentId]};</property>
+                  name="ParameterMap">#{Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[SegmentId]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -122,7 +122,7 @@ where [refTable].[Id] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\Lookup.Connections[OleDbConnection]"
+                  refId="Package\Load Customer Dimension\Customer Segment Lookup.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.dollmart-source-database]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.dollmart-source-database]"
                   description="Connection manager used to access lookup data."
@@ -130,14 +130,14 @@ where [refTable].[Id] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  refId="Package\Load Customer Dimension\Customer Segment Lookup.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Lookup.Inputs[Lookup Input].Columns[SegmentId]"
+                      refId="Package\Load Customer Dimension\Customer Segment Lookup.Inputs[Lookup Input].Columns[SegmentId]"
                       cachedDataType="i4"
                       cachedName="SegmentId"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SegmentId]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[SegmentId]">
                       <properties>
                         <property
                           dataType="System.String"
@@ -155,19 +155,19 @@ where [refTable].[Id] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Customer Dimension\Customer Segment Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[SegmentName]"
+                      refId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Match Output].Columns[SegmentName]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
                       length="7"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[SegmentName]"
+                      lineageId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Match Output].Columns[SegmentName]"
                       name="SegmentName"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -181,30 +181,30 @@ where [refTable].[Id] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Customer Dimension\Customer Segment Lookup.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Load Customer Dimension\Customer Segment Lookup.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -213,11 +213,258 @@ where [refTable].[Id] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination"
+              refId="Package\Load Customer Dimension\Customer Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Customer Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Customer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Customer Dimension\Customer Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.dollmart-source-database]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.dollmart-source-database]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      length="100"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[SegmentId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[SegmentId]"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[SegmentId]"
+                      name="SegmentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      length="100"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Address]"
+                      name="Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="50"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="3"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="50"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerNumber]"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerNumber]"
+                      name="CustomerNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[SegmentId]"
+                      dataType="i4"
+                      name="SegmentId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="100"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="3"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerNumber]"
+                      dataType="i4"
+                      name="CustomerNumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="i4"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerNumber]"
+                      dataType="i4"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerNumber]"
+                      name="CustomerNumber" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[SegmentId]"
+                      dataType="i4"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[SegmentId]"
+                      name="SegmentId" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      name="Address" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Customer Dimension\Load Customer Dimension"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination"
+              name="Load Customer Dimension"
               usesDispositions="true"
               version="4">
               <properties>
@@ -270,7 +517,7 @@ where [refTable].[Id] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\Load Customer Dimension\Load Customer Dimension.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.dollmart-target-database]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.dollmart-target-database]"
                   description="The OLE DB runtime connection used to access the database."
@@ -278,98 +525,98 @@ where [refTable].[Id] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[CustomerName]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="CustomerName"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerName]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[CustomerName]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Address]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[Address]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="Address"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Address]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Address]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[City]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="City"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[City]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[City]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[State]"
                       cachedDataType="wstr"
                       cachedLength="3"
                       cachedName="State"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[State]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[State]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Country]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[Country]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="Country"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Country]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Country]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[Gender]"
                       cachedDataType="wstr"
                       cachedLength="7"
                       cachedName="Gender"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Gender]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Id]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].Columns[Id]"
                       cachedDataType="i4"
                       cachedName="Id"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Id]" />
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Id]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
                       dataType="i4"
                       name="CustomerKey" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
                       dataType="i4"
                       name="CustomerID" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
                       dataType="wstr"
                       length="100"
                       name="CustomerName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
                       dataType="wstr"
                       length="7"
                       name="Gender" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
                       dataType="wstr"
                       length="100"
                       name="Address" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[City]"
                       dataType="wstr"
                       length="50"
                       name="City" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[State]"
                       dataType="wstr"
                       length="3"
                       name="State" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
                       dataType="wstr"
                       length="50"
                       name="Country" />
@@ -378,22 +625,22 @@ where [refTable].[Id] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Load Customer Dimension\Load Customer Dimension.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Load Customer Dimension\Load Customer Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Load Customer Dimension\Load Customer Dimension.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -402,361 +649,132 @@ where [refTable].[Id] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Source"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="OLE DB Source"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Customer]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">0</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.dollmart-source-database]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.dollmart-source-database]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
-                      name="Id"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
-                      length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]"
-                      name="CustomerName"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SegmentId]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SegmentId]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SegmentId]"
-                      name="SegmentId"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
-                      length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]"
-                      name="Address"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
-                      name="City"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
-                      length="3"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
-                      name="State"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]"
-                      name="Country"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
-                      dataType="i4"
-                      name="Id" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
-                      dataType="wstr"
-                      length="100"
-                      name="CustomerName" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SegmentId]"
-                      dataType="i4"
-                      name="SegmentId" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
-                      dataType="wstr"
-                      length="100"
-                      name="Address" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
-                      dataType="wstr"
-                      length="50"
-                      name="City" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
-                      dataType="wstr"
-                      length="3"
-                      name="State" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Country]"
-                      dataType="wstr"
-                      length="50"
-                      name="Country" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
-                      name="Id" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
-                      name="CustomerName" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SegmentId]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SegmentId]"
-                      name="SegmentId" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address]"
-                      name="Address" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
-                      name="City" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
-                      dataType="wstr"
-                      length="3"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
-                      name="State" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Country]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Country]"
-                      name="Country" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\Union All"
+              refId="Package\Load Customer Dimension\Union All - Customer + Segment"
               componentClassID="Microsoft.UnionAll"
               contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
-              name="Union All"
+              name="Union All - Customer + Segment"
               version="1">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+                  refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1]"
                   name="Union All Input 1">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Id]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[Id]"
                       cachedDataType="i4"
                       cachedName="Id"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Id]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Id]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Id]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[CustomerName]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[CustomerName]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="CustomerName"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerName]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerName]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerName]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[CustomerName]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[SegmentId]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[SegmentId]"
                       cachedDataType="i4"
                       cachedName="SegmentId"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SegmentId]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[SegmentId]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[SegmentId]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[SegmentId]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Address]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[Address]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="Address"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Address]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Address]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Address]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[City]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[City]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="City"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[City]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[City]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[City]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[State]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[State]"
                       cachedDataType="wstr"
                       cachedLength="3"
                       cachedName="State"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[State]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[State]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[State]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Country]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[Country]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="Country"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Country]">
+                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Country]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Country]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Country]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[SegmentName]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1].Columns[SegmentName]"
                       cachedDataType="wstr"
                       cachedLength="7"
                       cachedName="SegmentName"
-                      lineageId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[SegmentName]">
+                      lineageId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Match Output].Columns[SegmentName]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]}</property>
+                          name="OutputColumnLineageID">#{Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Gender]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
                 <input
-                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+                  refId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 2]"
                   dangling="true"
                   hasSideEffects="true"
                   name="Union All Input 2">
@@ -765,54 +783,54 @@ where [refTable].[Id] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]"
+                  refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1]"
                   name="Union All Output 1">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Id]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Id]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Id]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Id]"
                       name="Id" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerName]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[CustomerName]"
                       dataType="wstr"
                       length="100"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerName]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[CustomerName]"
                       name="CustomerName" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[SegmentId]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[SegmentId]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[SegmentId]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[SegmentId]"
                       name="SegmentId" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Address]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Address]"
                       dataType="wstr"
                       length="100"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Address]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Address]"
                       name="Address" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[City]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[City]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[City]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[City]"
                       name="City" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[State]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[State]"
                       dataType="wstr"
                       length="3"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[State]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[State]"
                       name="State" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Country]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Country]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Country]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Country]"
                       name="Country" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                      refId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Gender]"
                       dataType="wstr"
                       length="7"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                      lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Gender]"
                       name="Gender" />
                   </outputColumns>
                   <externalMetadataColumns />
@@ -822,32 +840,32 @@ where [refTable].[Id] = ?</property>
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[Lookup Match Output]"
-              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+              refId="Package\Load Customer Dimension.Paths[Lookup Match Output]"
+              endId="Package\Load Customer Dimension\Union All - Customer + Segment.Inputs[Union All Input 1]"
               name="Lookup Match Output"
-              startId="Package\Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+              startId="Package\Load Customer Dimension\Customer Segment Lookup.Outputs[Lookup Match Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
-              endId="Package\Data Flow Task\Lookup.Inputs[Lookup Input]"
+              refId="Package\Load Customer Dimension.Paths[OLE DB Source Output]"
+              endId="Package\Load Customer Dimension\Customer Segment Lookup.Inputs[Lookup Input]"
               name="OLE DB Source Output"
-              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Union All Output 1]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              refId="Package\Load Customer Dimension.Paths[Union All Output 1]"
+              endId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input]"
               name="Union All Output 1"
-              startId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]" />
+              startId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\Truncate Customer Dimension"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{34A07B33-184C-46C6-AB6D-26B8C2807F69}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="Truncate Customer Dimension"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -862,10 +880,10 @@ where [refTable].[Id] = ?</property>
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{1FFD7495-5A23-4C8A-BD6D-5A65AEBEC610}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:From="Package\Truncate Customer Dimension"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Data Flow Task" />
+      DTS:To="Package\Load Customer Dimension" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -878,29 +896,29 @@ where [refTable].[Id] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
-          Id="Package\Data Flow Task"
-          TopLeft="215,109" />
+          Size="202,42"
+          Id="Package\Load Customer Dimension"
+          TopLeft="186.25,179.5" />
         <NodeLayout
-          Size="163,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="209,21" />
+          Size="221,42"
+          Id="Package\Truncate Customer Dimension"
+          TopLeft="176.75,70.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="290.5,63">
+          TopLeft="287.25,112.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,46"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
               Start="0,0"
-              End="0,38.5">
+              End="0,59.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.5" />
+                    End="0,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -909,36 +927,51 @@ where [refTable].[Id] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <AnnotationLayout
+          Text="Clear all the existing rows in Customer dimension, and load data again"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="200,72"
+          Id="66a42fdc-0e4d-4dcc-b805-ee8978194b87"
+          TopLeft="389.5,114.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Data Flow Task">
+    design-time-name="Package\Load Customer Dimension">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="150,42"
-          Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="298,18" />
+          Size="202,42"
+          Id="Package\Load Customer Dimension\Load Customer Dimension"
+          TopLeft="130.5,254.5" />
         <NodeLayout
-          Size="113,42"
-          Id="Package\Data Flow Task\Lookup"
-          TopLeft="321,106" />
+          Size="159,42"
+          Id="Package\Load Customer Dimension\Customer Source"
+          TopLeft="152,10.5" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Load Customer Dimension\Customer Segment Lookup"
+          TopLeft="128.5,84.5" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Load Customer Dimension\Union All - Customer + Segment"
+          TopLeft="115.5,178.5" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="375.25,60">
+          Id="Package\Load Customer Dimension.Paths[Union All Output 1]"
+          TopLeft="231.5,220.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,46"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
               Start="0,0"
-              End="0,38.5">
+              End="0,26.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.5" />
+                    End="0,26.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -947,65 +980,78 @@ where [refTable].[Id] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="121,42"
-          Id="Package\Data Flow Task\Union All"
-          TopLeft="317,186" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Lookup Match Output]"
-          TopLeft="377.5,148">
+          Id="Package\Load Customer Dimension.Paths[OLE DB Source Output]"
+          TopLeft="231.5,52.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,38"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
               Start="0,0"
-              End="0,30.5">
+              End="0,24.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.5" />
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Customer Dimension.Paths[Lookup Match Output]"
+          TopLeft="231.5,126.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,9.4453125,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,16.4453125,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="293,261" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Union All Output 1]"
-          TopLeft="378,228">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,33"
-              Start="0,0"
-              End="0,25.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <AnnotationLayout
+          Text="Lookup for Segment Name to join Gender Fields with Customer Table"
+          ParentId="Package\Load Customer Dimension"
+          FontInfo="{assembly:Null}"
+          Size="225,60"
+          Id="6b3391a1-1b7c-432d-85b8-1e9d88295dd3"
+          TopLeft="349.333333333333,100.5" />
+        <AnnotationLayout
+          Text="Combine Customer and Customer Segment and get Gender Segment "
+          ParentId="Package\Load Customer Dimension"
+          FontInfo="{assembly:Null}"
+          Size="225,56"
+          Id="b97a88f7-d849-4767-afaa-7690250abab8"
+          TopLeft="349.333333333333,169.5" />
+        <AnnotationLayout
+          Text="Extract data from Customer data in source system"
+          ParentId="Package\Load Customer Dimension"
+          FontInfo="{assembly:Null}"
+          Size="225,60"
+          Id="a1bd7129-bd81-4a6c-9b90-7f90394aab32"
+          TopLeft="349.333333333333,31.4999999999999" />
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Source">
+    design-time-name="Package\Load Customer Dimension\Customer Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1018,12 +1064,25 @@ where [refTable].[Id] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Lookup">
+    design-time-name="Package\Load Customer Dimension\Load Customer Dimension">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Customer Dimension\Customer Segment Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1033,23 +1092,10 @@ where [refTable].[Id] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
