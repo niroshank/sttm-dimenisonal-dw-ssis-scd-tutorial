@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SCD_Type 02 Question C_v"
   DTS:PackageType="5"
-  DTS:VersionBuild="41"
-  DTS:VersionGUID="{7B4491C1-7BA8-49E2-B7D9-460F71AFFA69}">
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{45374C1A-F3F7-475E-A299-22F3F610F39D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -3091,17 +3091,17 @@ where [refTable].[Id] = ?</property>
           Id="Package\Updat Customer Dimesion\Data Conversion"
           TopLeft="202.5,17.5" />
         <NodeLayout
-          Size="140,42"
-          Id="Package\Updat Customer Dimesion\Date Column"
-          TopLeft="337,553.5" />
+          Size="121,42"
+          Id="Package\Updat Customer Dimesion\Union All"
+          TopLeft="414,114.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Updat Customer Dimesion\Derived Column"
+          TopLeft="19.5000000000001,230.5" />
         <NodeLayout
           Size="158,42"
           Id="Package\Updat Customer Dimesion\Lookup Segment"
           TopLeft="396,19.5" />
-        <NodeLayout
-          Size="121,42"
-          Id="Package\Updat Customer Dimesion\Union All"
-          TopLeft="414,114.5" />
         <NodeLayout
           Size="163,42"
           Id="Package\Updat Customer Dimesion\Insert Destination"
@@ -3111,13 +3111,37 @@ where [refTable].[Id] = ?</property>
           Id="Package\Updat Customer Dimesion\Flat File Source"
           TopLeft="17,18.5" />
         <NodeLayout
-          Size="154,42"
-          Id="Package\Updat Customer Dimesion\Derived Column"
-          TopLeft="19.5000000000001,230.5" />
+          Size="140,42"
+          Id="Package\Updat Customer Dimesion\Date Column"
+          TopLeft="337,553.5" />
         <NodeLayout
           Size="216,42"
           Id="Package\Updat Customer Dimesion\Union All - Updates + Inserts"
           TopLeft="293.5,478.5" />
+        <EdgeLayout
+          Id="Package\Updat Customer Dimesion.Paths[Lookup Match Output]"
+          TopLeft="474.75,61.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,16.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Updat Customer Dimesion.Paths[Historical Attribute Inserts Output]"
           TopLeft="224,155.5">
@@ -3333,17 +3357,17 @@ where [refTable].[Id] = ?</property>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,157.549158585902" />
+                    End="0,29.549158585902" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,157.549158585902"
-                    Point2="0,161.549158585902"
-                    Point3="4,161.549158585902" />
+                    Point1="0,29.549158585902"
+                    Point2="0,33.549158585902"
+                    Point3="4,33.549158585902" />
                   <mssgle:LineSegment
-                    End="141.166666666667,161.549158585902" />
+                    End="141.166666666667,33.549158585902" />
                   <mssgle:CubicBezierSegment
-                    Point1="141.166666666667,161.549158585902"
-                    Point2="145.166666666667,161.549158585902"
-                    Point3="145.166666666667,165.549158585902" />
+                    Point1="141.166666666667,33.549158585902"
+                    Point2="145.166666666667,33.549158585902"
+                    Point3="145.166666666667,37.549158585902" />
                   <mssgle:LineSegment
                     End="145.166666666667,315.5" />
                 </mssgle:SegmentCollection>
@@ -3352,31 +3376,7 @@ where [refTable].[Id] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="45.4919466145833,166.549158585902,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Updat Customer Dimesion.Paths[Lookup Match Output]"
-          TopLeft="474.75,61.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,53"
-              Start="0,0"
-              End="0,45.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,45.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,16.9453125,96.3827734375,11.609375"
+              BoundingBox="45.4919466145835,38.549158585902,54.1827734375,11.43359375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
