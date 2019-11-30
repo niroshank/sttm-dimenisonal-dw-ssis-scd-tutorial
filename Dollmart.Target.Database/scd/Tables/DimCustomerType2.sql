@@ -7,9 +7,8 @@
     [City]         NVARCHAR (50)  NOT NULL,
     [State]        NCHAR (3)      NOT NULL,
     [Country]      NVARCHAR (50)  NOT NULL,
-	[IsActive]	   BIT			  NULL,
-	[CreatedDate]  DATE			  NULL,
-	[UpdatedDate]   DATE		  NULL,
+    [CreatedDate]  DATE           NULL,
+    [UpdatedDate]  DATE           NULL,
     CONSTRAINT [PK_scd.DimCustomerType2] PRIMARY KEY CLUSTERED ([CustomerKey] ASC)
 );
 
