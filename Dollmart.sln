@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{54FE8F6B-B
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Dollmart.Target.Database", "Dollmart.Target.Database\Dollmart.Target.Database.sqlproj", "{5C399F69-8D7E-489D-A2BA-DA62A56047AD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ETL System", "ETL System", "{370FE193-16D8-498A-BB54-8548BE00035E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dollmart.ETLSystem", "Dollmart.ETLSystem", "{370FE193-16D8-498A-BB54-8548BE00035E}"
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Dollmart.IntegrationServices", "Dollmart.IntegrationServices\Dollmart.IntegrationServices.dtproj", "{76CB948B-17D1-4FDF-8CB1-8781BAE7064A}"
 EndProject
