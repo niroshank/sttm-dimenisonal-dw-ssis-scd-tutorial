@@ -1,5 +1,5 @@
 # sttm-dimenisonal-dw-ssis-scd-tutorial
-Source to Target Mapping, Dimensional Model, Data warehousing, SQL Server Integration Services, Slowly Changing Dimension ( Kimbal's Type 1,2 and 3 ) tutorial 
+Source to Target Mapping, Dimensional Model, Data warehousing, SQL Server Integration Services, Slowly Changing Dimension ( Kimbal's Type 1,2 and 3 )
 
 ## Setup 
 1. Design a dimensional model for the below scenario -> **Dimensional Model** Folder
