@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SCD_Type 03 Question C_v"
   DTS:PackageType="5"
-  DTS:VersionBuild="23"
-  DTS:VersionGUID="{999A6B4A-F42B-4C14-82F9-9A6FD15ACEB4}">
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{8DDCF79D-3C11-4D5C-A78A-CFC70FC2FBC0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -435,7 +435,7 @@ where [refTable].[Id] = ?</property>
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[DimCustomer]</property>
+                  name="OpenRowset">[scd].[DimCustomerType3]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -537,7 +537,7 @@ where [refTable].[Id] = ?</property>
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="Address"
-                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      externalMetadataColumnId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CurrentAddress]"
                       lineageId="Package\Load Customer Dimension\Union All - Customer + Segment.Outputs[Union All Output 1].Columns[Address]" />
                   </inputColumns>
                   <externalMetadataColumns
@@ -576,10 +576,15 @@ where [refTable].[Id] = ?</property>
                       length="50"
                       name="Country" />
                     <externalMetadataColumn
-                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[CurrentAddress]"
                       dataType="wstr"
                       length="100"
-                      name="Address" />
+                      name="CurrentAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Load Customer Dimension\Load Customer Dimension.Inputs[OLE DB Destination Input].ExternalColumns[PreviousAddress]"
+                      dataType="wstr"
+                      length="100"
+                      name="PreviousAddress" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1548,11 +1553,11 @@ where [refTable].[Id] = ?</property>
               </outputs>
             </component>
             <component
-              refId="Package\Update Customer Dimension\Lookup"
+              refId="Package\Update Customer Dimension\Lookup Segment"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
+              name="Lookup Segment"
               usesDispositions="true"
               version="6">
               <properties>
@@ -1616,7 +1621,7 @@ where [refTable].[Id] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Update Customer Dimension\Lookup.Connections[OleDbConnection]"
+                  refId="Package\Update Customer Dimension\Lookup Segment.Connections[OleDbConnection]"
                   connectionManagerID="{C0E968F3-5B7F-4E1C-BC36-9F1A88C8A225}:external"
                   connectionManagerRefId="Project.ConnectionManagers[LocalHost.dollmart-source-database]"
                   description="Connection manager used to access lookup data."
@@ -1624,11 +1629,11 @@ where [refTable].[Id] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\Update Customer Dimension\Lookup.Inputs[Lookup Input]"
+                  refId="Package\Update Customer Dimension\Lookup Segment.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Lookup.Inputs[Lookup Input].Columns[SegmentId]"
+                      refId="Package\Update Customer Dimension\Lookup Segment.Inputs[Lookup Input].Columns[SegmentId]"
                       cachedDataType="i4"
                       cachedName="SegmentId"
                       lineageId="Package\Update Customer Dimension\Data Conversion.Outputs[Data Conversion Output].Columns[SegmentId]">
@@ -1649,19 +1654,19 @@ where [refTable].[Id] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Match Output]"
+                  refId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
                   errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\Update Customer Dimension\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Update Customer Dimension\Lookup Segment.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Match Output].Columns[SegmentName]"
+                      refId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Match Output].Columns[SegmentName]"
                       dataType="wstr"
                       errorOrTruncationOperation="Copy Column"
                       length="7"
-                      lineageId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Match Output].Columns[SegmentName]"
+                      lineageId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Match Output].Columns[SegmentName]"
                       name="SegmentName"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -1675,189 +1680,30 @@ where [refTable].[Id] = ?</property>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Update Customer Dimension\Lookup.Outputs[Lookup No Match Output]"
+                  refId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\Update Customer Dimension\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Update Customer Dimension\Lookup Segment.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Error Output]"
+                  refId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\Update Customer Dimension\Lookup.Inputs[Lookup Input]">
+                  synchronousInputId="Package\Update Customer Dimension\Lookup Segment.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Update Customer Dimension\Lookup 2"
-              componentClassID="Microsoft.Lookup"
-              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
-              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup 2"
-              usesDispositions="true"
-              version="6">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SQL statement that generates the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [scd].[DimCustomerType3]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (select * from [scd].[DimCustomerType3]) [refTable]
-where [refTable].[CustomerID] = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the type of connection used to access the reference dataset."
-                  name="ConnectionType"
-                  typeConverter="LookupConnectionType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the cache type of the lookup table."
-                  name="CacheType"
-                  typeConverter="CacheType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
-                  name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
-                  name="NoMatchCachePercentage">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
-                  name="MaxMemoryUsage">25</property>
-                <property
-                  dataType="System.Int64"
-                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
-                  name="MaxMemoryUsage64">25</property>
-                <property
-                  dataType="System.String"
-                  description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerName" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Gender" dataType="DT_WSTR" length="7" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CurrentAddress" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PreviousAddress" dataType="DT_WSTR" length="100" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="City" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="State" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Country" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
-                <property
-                  containsID="true"
-                  dataType="System.String"
-                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Update Customer Dimension\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]};</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Update Customer Dimension\Lookup 2.Connections[OleDbConnection]"
-                  connectionManagerID="{C45839A3-1681-4630-AF1F-C39C58DDDDA2}:external"
-                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.dollmart-target-database]"
-                  description="Connection manager used to access lookup data."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Update Customer Dimension\Lookup 2.Inputs[Lookup Input]"
-                  name="Lookup Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Update Customer Dimension\Lookup 2.Inputs[Lookup Input].Columns[CustomerID]"
-                      cachedDataType="i4"
-                      cachedName="CustomerID"
-                      lineageId="Package\Update Customer Dimension\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">CustomerID</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Match Output]"
-                  errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="FailComponent"
-                  exclusionGroup="1"
-                  name="Lookup Match Output"
-                  synchronousInputId="Package\Update Customer Dimension\Lookup 2.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Match Output].Columns[OutputAddress]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Copy Column"
-                      length="100"
-                      lineageId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Match Output].Columns[OutputAddress]"
-                      name="OutputAddress"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">CurrentAddress</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup No Match Output]"
-                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
-                  exclusionGroup="1"
-                  name="Lookup No Match Output"
-                  synchronousInputId="Package\Update Customer Dimension\Lookup 2.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Lookup Error Output"
-                  synchronousInputId="Package\Update Customer Dimension\Lookup 2.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1883,7 +1729,7 @@ where [refTable].[CustomerID] = ?</property>
                   description="The SQL command to be executed."
                   expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE [scd].[DimCustomerType3] SET [CurrentAddress] = ?, [PreviousAddress] = ? WHERE [CustomerID] = ?</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE [scd].[DimCustomerType3] SET [CurrentAddress] = ?, [PreviousAddress] = [CurrentAddress] WHERE [CustomerID] = ?</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1913,17 +1759,10 @@ where [refTable].[CustomerID] = ?</property>
                       externalMetadataColumnId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
                       lineageId="Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[CurrentAddress]" />
                     <inputColumn
-                      refId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[OutputAddress]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="OutputAddress"
-                      externalMetadataColumnId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      lineageId="Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[OutputAddress]" />
-                    <inputColumn
                       refId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[Id]"
                       cachedDataType="i4"
                       cachedName="Id"
-                      externalMetadataColumnId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      externalMetadataColumnId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
                       lineageId="Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[Id]" />
                   </inputColumns>
                   <externalMetadataColumns
@@ -1942,20 +1781,8 @@ where [refTable].[CustomerID] = ?</property>
                     </externalMetadataColumn>
                     <externalMetadataColumn
                       refId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
-                      dataType="wstr"
-                      length="100"
-                      name="Param_1">
-                      <properties>
-                        <property
-                          dataType="System.Int32"
-                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
-                          name="DBParamInfoFlags">81</property>
-                      </properties>
-                    </externalMetadataColumn>
-                    <externalMetadataColumn
-                      refId="Package\Update Customer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
                       dataType="i4"
-                      name="Param_2">
+                      name="Param_1">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -2160,12 +1987,12 @@ where [refTable].[CustomerID] = ?</property>
               version="1">
               <inputs>
                 <input
-                  refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2]"
+                  refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3]"
                   hasSideEffects="true"
-                  name="Union All Input 2">
+                  name="Union All Input 3">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[CustomerName]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[CustomerName]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="CustomerName"
@@ -2179,7 +2006,7 @@ where [refTable].[CustomerID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[CurrentAddress]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[CurrentAddress]"
                       cachedDataType="wstr"
                       cachedLength="100"
                       cachedName="CurrentAddress"
@@ -2193,7 +2020,7 @@ where [refTable].[CustomerID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[City]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[City]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="City"
@@ -2207,7 +2034,7 @@ where [refTable].[CustomerID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[State]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[State]"
                       cachedDataType="wstr"
                       cachedLength="3"
                       cachedName="State"
@@ -2221,7 +2048,7 @@ where [refTable].[CustomerID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[Country]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[Country]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="Country"
@@ -2235,25 +2062,11 @@ where [refTable].[CustomerID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[OutputAddress]"
-                      cachedDataType="wstr"
-                      cachedLength="100"
-                      cachedName="OutputAddress"
-                      lineageId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Match Output].Columns[OutputAddress]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[OutputAddress]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[SegmentName]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[SegmentName]"
                       cachedDataType="wstr"
                       cachedLength="7"
                       cachedName="SegmentName"
-                      lineageId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Match Output].Columns[SegmentName]">
+                      lineageId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Match Output].Columns[SegmentName]">
                       <properties>
                         <property
                           containsID="true"
@@ -2263,7 +2076,7 @@ where [refTable].[CustomerID] = ?</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2].Columns[CustomerID]"
+                      refId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3].Columns[CustomerID]"
                       cachedDataType="i4"
                       cachedName="CustomerID"
                       lineageId="Package\Update Customer Dimension\Data Conversion.Outputs[Data Conversion Output].Columns[CustomerID]">
@@ -2332,12 +2145,6 @@ where [refTable].[CustomerID] = ?</property>
                       length="7"
                       lineageId="Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[Gender]"
                       name="Gender" />
-                    <outputColumn
-                      refId="Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[OutputAddress]"
-                      dataType="wstr"
-                      length="100"
-                      lineageId="Package\Update Customer Dimension\Union All.Outputs[Union All Output 1].Columns[OutputAddress]"
-                      name="OutputAddress" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2352,7 +2159,7 @@ where [refTable].[CustomerID] = ?</property>
               startId="Package\Update Customer Dimension\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]" />
             <path
               refId="Package\Update Customer Dimension.Paths[Data Conversion Output]"
-              endId="Package\Update Customer Dimension\Lookup.Inputs[Lookup Input]"
+              endId="Package\Update Customer Dimension\Lookup Segment.Inputs[Lookup Input]"
               name="Data Conversion Output"
               startId="Package\Update Customer Dimension\Data Conversion.Outputs[Data Conversion Output]" />
             <path
@@ -2362,14 +2169,9 @@ where [refTable].[CustomerID] = ?</property>
               startId="Package\Update Customer Dimension\Flat File Source.Outputs[Flat File Source Output]" />
             <path
               refId="Package\Update Customer Dimension.Paths[Lookup Match Output]"
-              endId="Package\Update Customer Dimension\Lookup 2.Inputs[Lookup Input]"
+              endId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 3]"
               name="Lookup Match Output"
-              startId="Package\Update Customer Dimension\Lookup.Outputs[Lookup Match Output]" />
-            <path
-              refId="Package\Update Customer Dimension.Paths[Lookup Match Output1]"
-              endId="Package\Update Customer Dimension\Union All.Inputs[Union All Input 2]"
-              name="Lookup Match Output"
-              startId="Package\Update Customer Dimension\Lookup 2.Outputs[Lookup Match Output]" />
+              startId="Package\Update Customer Dimension\Lookup Segment.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Update Customer Dimension.Paths[New Output]"
               endId="Package\Update Customer Dimension\Insert Destination.Inputs[OLE DB Destination Input]"
@@ -2496,22 +2298,22 @@ where [refTable].[CustomerID] = ?</property>
         <NodeLayout
           Size="159,42"
           Id="Package\Load Customer Dimension\Customer Source"
-          TopLeft="146.5,81" />
-        <NodeLayout
-          Size="202,42"
-          Id="Package\Load Customer Dimension\Load Customer Dimension"
-          TopLeft="125,325" />
-        <NodeLayout
-          Size="206,42"
-          Id="Package\Load Customer Dimension\Customer Segment Lookup"
-          TopLeft="123,155" />
+          TopLeft="170.5,20" />
         <NodeLayout
           Size="232,42"
           Id="Package\Load Customer Dimension\Union All - Customer + Segment"
-          TopLeft="110,249" />
+          TopLeft="134,188" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Load Customer Dimension\Customer Segment Lookup"
+          TopLeft="147,94" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Load Customer Dimension\Load Customer Dimension"
+          TopLeft="149,264" />
         <EdgeLayout
           Id="Package\Load Customer Dimension.Paths[Union All Output 1]"
-          TopLeft="226,291">
+          TopLeft="250,230">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2533,7 +2335,7 @@ where [refTable].[CustomerID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Customer Dimension.Paths[OLE DB Source Output]"
-          TopLeft="226,123">
+          TopLeft="250,62">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2555,7 +2357,7 @@ where [refTable].[CustomerID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Load Customer Dimension.Paths[Lookup Match Output]"
-          TopLeft="226,197">
+          TopLeft="250,136">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2583,21 +2385,21 @@ where [refTable].[CustomerID] = ?</property>
           FontInfo="{assembly:Null}"
           Size="225,56"
           Id="9361279b-a567-445e-b1f1-15e248fba018"
-          TopLeft="343.833333333333,187" />
+          TopLeft="367.833333333333,126" />
         <AnnotationLayout
           Text="Combine Customer and Customer Segment and get Gender Segment "
           ParentId="Package\Load Customer Dimension"
           FontInfo="{assembly:Null}"
           Size="225,56"
           Id="32af545d-dcde-4be8-b2ff-7aa7efc7f81b"
-          TopLeft="347.833333333333,271" />
+          TopLeft="371.833333333333,210" />
         <AnnotationLayout
           Text="Extract data from Customer data in source system"
           ParentId="Package\Load Customer Dimension"
           FontInfo="{assembly:Null}"
           Size="225,56"
           Id="72998f0f-e2dd-40da-bd62-2151887487a4"
-          TopLeft="343.833333333333,102" />
+          TopLeft="367.833333333333,41" />
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -2654,31 +2456,27 @@ where [refTable].[CustomerID] = ?</property>
     design-time-name="Package\Update Customer Dimension">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="121,42"
           Id="Package\Update Customer Dimension\Union All"
-          TopLeft="256.5,123.5" />
+          TopLeft="450.5,121.5" />
         <NodeLayout
           Size="156,42"
           Id="Package\Update Customer Dimension\Data Conversion"
           TopLeft="235,14.5" />
         <NodeLayout
-          Size="122,42"
-          Id="Package\Update Customer Dimension\Lookup 2"
-          TopLeft="512,125.5" />
-        <NodeLayout
           Size="163,42"
           Id="Package\Update Customer Dimension\Insert Destination"
-          TopLeft="12.5000000000001,254.5" />
+          TopLeft="15.5000000000001,260.5" />
         <NodeLayout
-          Size="113,42"
-          Id="Package\Update Customer Dimension\Lookup"
+          Size="158,42"
+          Id="Package\Update Customer Dimension\Lookup Segment"
           TopLeft="429.5,16.5" />
         <NodeLayout
           Size="166,42"
           Id="Package\Update Customer Dimension\OLE DB Command"
-          TopLeft="318,257.5" />
+          TopLeft="321,263.5" />
         <NodeLayout
           Size="151,42"
           Id="Package\Update Customer Dimension\Flat File Source"
@@ -2686,21 +2484,21 @@ where [refTable].[CustomerID] = ?</property>
         <NodeLayout
           Size="209,42"
           Id="Package\Update Customer Dimension\Slowly Changing Dimension"
-          TopLeft="15.5000000000001,123.5" />
+          TopLeft="119.5,126.5" />
         <EdgeLayout
           Id="Package\Update Customer Dimension.Paths[Union All Output 1]"
-          TopLeft="256.5,144.5">
+          TopLeft="450.5,145">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-31.9999999999999,0"
+              EndConnector="-122,0"
               Start="0,0"
-              End="-24.4999999999999,0">
+              End="-114.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-24.4999999999999,0" />
+                    End="-114.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2711,85 +2509,37 @@ where [refTable].[CustomerID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Update Customer Dimension.Paths[New Output]"
-          TopLeft="90.2500000000001,165.5">
+          TopLeft="190.5,168.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,89"
+              EndConnector="-93.5,92"
               Start="0,0"
-              End="0,81.5">
+              End="-93.5,84.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,81.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-27.09138671875,35.033203125,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Update Customer Dimension.Paths[Lookup Match Output1]"
-          TopLeft="512,145.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-134.5,0"
-              Start="0,0"
-              End="-127,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-127,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-111.69138671875,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Update Customer Dimension.Paths[Lookup Match Output]"
-          TopLeft="486,58.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="87,67"
-              Start="0,0"
-              End="87,59.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.5" />
+                    End="0,33.2193732193732" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.5"
-                    Point2="0,33.5"
-                    Point3="4,33.5" />
+                    Point1="0,33.2193732193732"
+                    Point2="0,37.2193732193732"
+                    Point3="-4,37.2193732193732" />
                   <mssgle:LineSegment
-                    End="83,33.5" />
+                    End="-89.5,37.2193732193732" />
                   <mssgle:CubicBezierSegment
-                    Point1="83,33.5"
-                    Point2="87,33.5"
-                    Point3="87,37.5" />
+                    Point1="-89.5,37.2193732193732"
+                    Point2="-93.5,37.2193732193732"
+                    Point3="-93.5,41.2193732193732" />
                   <mssgle:LineSegment
-                    End="87,59.5" />
+                    End="-93.5,84.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-4.69138671875,38.5,96.3827734375,11.609375"
+              BoundingBox="-73.84138671875,42.2193732193732,54.1827734375,11.43359375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2821,14 +2571,14 @@ where [refTable].[CustomerID] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="38.4999999999999,0"
+              EndConnector="38.5,0"
               Start="0,0"
-              End="30.9999999999999,0">
+              End="31,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="30.9999999999999,0" />
+                    End="31,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2839,37 +2589,37 @@ where [refTable].[CustomerID] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Update Customer Dimension.Paths[Changing Attribute Updates Output]"
-          TopLeft="153.5,165.5">
+          TopLeft="257.5,168.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="247.5,92"
+              EndConnector="146.5,95"
               Start="0,0"
-              End="247.5,84.5">
+              End="146.5,87.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.2193732193732" />
+                    End="0,34.4330484330484" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,33.2193732193732"
-                    Point2="0,37.2193732193732"
-                    Point3="4,37.2193732193732" />
+                    Point1="0,34.4330484330484"
+                    Point2="0,38.4330484330484"
+                    Point3="4,38.4330484330484" />
                   <mssgle:LineSegment
-                    End="243.5,37.2193732193732" />
+                    End="142.5,38.4330484330484" />
                   <mssgle:CubicBezierSegment
-                    Point1="243.5,37.2193732193732"
-                    Point2="247.5,37.2193732193732"
-                    Point3="247.5,41.2193732193732" />
+                    Point1="142.5,38.4330484330484"
+                    Point2="146.5,38.4330484330484"
+                    Point3="146.5,42.4330484330484" />
                   <mssgle:LineSegment
-                    End="247.5,84.5" />
+                    End="146.5,87.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="45.21609375,42.2193732193732,157.0678125,11.6630859375"
+              BoundingBox="-5.28390625000009,43.4330484330484,157.0678125,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2879,54 +2629,68 @@ where [refTable].[CustomerID] = ?</property>
           FontInfo="{assembly:Null}"
           Size="144,72"
           Id="60436591-0d11-41b5-a249-f499965cdb82"
-          TopLeft="538.590909090909,0.863636363636353" />
+          TopLeft="584.590909090909,4.86363636363635" />
         <AnnotationLayout
           Text="Add new rows, that not exists in the customer dim"
           ParentId="Package\Update Customer Dimension"
           FontInfo="{assembly:Null}"
           Size="130,72"
           Id="857d0c91-f89f-4c01-87da-1bfac9425aef"
-          TopLeft="174.5,240.5" />
+          TopLeft="177.5,246.5" />
         <AnnotationLayout
           Text="Update current address and previous address"
           ParentId="Package\Update Customer Dimension"
           FontInfo="{assembly:Null}"
           Size="131,72"
           Id="f587d737-2abd-4b7c-9756-d02ebbcd47fb"
-          TopLeft="483.5,242.5" />
+          TopLeft="486.5,248.5" />
+        <EdgeLayout
+          Id="Package\Update Customer Dimension.Paths[Lookup Match Output]"
+          TopLeft="509.75,58.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="0,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,21.9453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Update Customer Dimension\Lookup 2">
+    design-time-name="Package\Update Customer Dimension\Insert Destination">
     <Properties>
       <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:string">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[scd].[DimCustomerType3]</Value>
+        <Name>DataSourceViewID</Name>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Update Customer Dimension\Lookup">
+    design-time-name="Package\Update Customer Dimension\Lookup Segment">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2936,7 +2700,7 @@ where [refTable].[CustomerID] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:string">0</Value>
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>

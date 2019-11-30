@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SCD_Type 02 Question C_v"
   DTS:PackageType="5"
-  DTS:VersionBuild="42"
-  DTS:VersionGUID="{45374C1A-F3F7-475E-A299-22F3F610F39D}">
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{E74080A0-5146-4267-97E1-ADEEBE2F165F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -2928,6 +2928,42 @@ where [refTable].[Id] = ?</property>
           Id="Package\Load Customer Dimension\Customer Segment Lookup"
           TopLeft="210.625,91" />
         <EdgeLayout
+          Id="Package\Load Customer Dimension.Paths[Lookup Match Output]"
+          TopLeft="313.625,133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-228.625,56"
+              Start="0,0"
+              End="-228.625,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24"
+                    Point2="0,28"
+                    Point3="-4,28" />
+                  <mssgle:LineSegment
+                    End="-224.625,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-224.625,28"
+                    Point2="-228.625,28"
+                    Point3="-228.625,32" />
+                  <mssgle:LineSegment
+                    End="-228.625,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-162.50388671875,33,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\Load Customer Dimension.Paths[Derived Column Output]"
           TopLeft="155,210.5">
           <EdgeLayout.Curve>
@@ -2991,42 +3027,6 @@ where [refTable].[Id] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Load Customer Dimension.Paths[Lookup Match Output]"
-          TopLeft="313.625,133">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-228.625,56"
-              Start="0,0"
-              End="-228.625,48.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24"
-                    Point2="0,28"
-                    Point3="-4,28" />
-                  <mssgle:LineSegment
-                    End="-224.625,28" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-224.625,28"
-                    Point2="-228.625,28"
-                    Point3="-228.625,32" />
-                  <mssgle:LineSegment
-                    End="-228.625,48.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-162.50388671875,33,96.3827734375,11.609375"
-              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <AnnotationLayout

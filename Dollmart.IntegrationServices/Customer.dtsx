@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Customer"
   DTS:PackageType="5"
-  DTS:VersionBuild="21"
-  DTS:VersionGUID="{AB628283-51EA-4FA7-97F9-188BAA13B1C5}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{1BC04B9D-4EBC-442F-B410-A534BF7D7D70}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -341,15 +341,6 @@ where [refTable].[Id] = ?</property>
                       lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[Country]"
                       name="Country"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerNumber]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerNumber]"
-                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].Columns[CustomerNumber]"
-                      name="CustomerNumber"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -386,10 +377,6 @@ where [refTable].[Id] = ?</property>
                       dataType="wstr"
                       length="50"
                       name="Country" />
-                    <externalMetadataColumn
-                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Output].ExternalColumns[CustomerNumber]"
-                      dataType="i4"
-                      name="CustomerNumber" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -402,11 +389,6 @@ where [refTable].[Id] = ?</property>
                       dataType="i4"
                       lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[Id]"
                       name="Id" />
-                    <outputColumn
-                      refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerNumber]"
-                      dataType="i4"
-                      lineageId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerNumber]"
-                      name="CustomerNumber" />
                     <outputColumn
                       refId="Package\Load Customer Dimension\Customer Source.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
                       dataType="wstr"
@@ -943,13 +925,13 @@ where [refTable].[Id] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="202,42"
-          Id="Package\Load Customer Dimension\Load Customer Dimension"
-          TopLeft="130.5,254.5" />
-        <NodeLayout
           Size="159,42"
           Id="Package\Load Customer Dimension\Customer Source"
           TopLeft="152,10.5" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Load Customer Dimension\Load Customer Dimension"
+          TopLeft="130.5,254.5" />
         <NodeLayout
           Size="206,42"
           Id="Package\Load Customer Dimension\Customer Segment Lookup"
@@ -1030,7 +1012,7 @@ where [refTable].[Id] = ?</property>
           Text="Lookup for Segment Name to join Gender Fields with Customer Table"
           ParentId="Package\Load Customer Dimension"
           FontInfo="{assembly:Null}"
-          Size="225,60"
+          Size="225,56"
           Id="6b3391a1-1b7c-432d-85b8-1e9d88295dd3"
           TopLeft="349.333333333333,100.5" />
         <AnnotationLayout
@@ -1044,7 +1026,7 @@ where [refTable].[Id] = ?</property>
           Text="Extract data from Customer data in source system"
           ParentId="Package\Load Customer Dimension"
           FontInfo="{assembly:Null}"
-          Size="225,60"
+          Size="225,56"
           Id="a1bd7129-bd81-4a6c-9b90-7f90394aab32"
           TopLeft="349.333333333333,31.4999999999999" />
       </GraphLayout>
