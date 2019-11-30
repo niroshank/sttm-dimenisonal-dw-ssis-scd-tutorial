@@ -1,4 +1,4 @@
-# sttm-dimenisonal-dw-ssis-scd-tutorial
+# sttm-dimenisonal-dw-ssis-scd
 Source to Target Mapping, Dimensional Model, Data warehousing, SQL Server Integration Services, Slowly Changing Dimension ( Kimbal's Type 1,2 and 3 )
 
 ## Setup 
